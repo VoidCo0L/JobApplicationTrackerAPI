@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36119.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JobApplicationTrackerAPI", "JobApplicationTrackerAPI\JobApplicationTrackerAPI.csproj", "{B08358B3-6466-4D06-834F-DDFC915EEC3D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B08358B3-6466-4D06-834F-DDFC915EEC3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B08358B3-6466-4D06-834F-DDFC915EEC3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B08358B3-6466-4D06-834F-DDFC915EEC3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B08358B3-6466-4D06-834F-DDFC915EEC3D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B9C1681C-62AF-4130-A4AA-0ECF3BE3727E}
+	EndGlobalSection
+EndGlobal
