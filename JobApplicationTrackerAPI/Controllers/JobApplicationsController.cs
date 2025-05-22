@@ -34,6 +34,11 @@ namespace JobApplicationTrackerApi.Controllers
         [HttpPost]
         public ActionResult<JobApplication> Create(JobApplication application)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             _repository.Add(application);
             return CreatedAtAction(nameof(GetById), new { id = application.Id }, application);
         }
@@ -41,6 +46,11 @@ namespace JobApplicationTrackerApi.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, JobApplication application)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             if (id != application.Id)
                 return BadRequest();
 
