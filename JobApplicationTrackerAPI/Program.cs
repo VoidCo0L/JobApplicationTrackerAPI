@@ -3,7 +3,7 @@ using JobApplicationTrackerApi.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<IJobApplicationRepository, InMemoryJobApplicationRepository>();
+builder.Services.AddSingleton<IJobApplicationRepository, JsonFileJobApplicationRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

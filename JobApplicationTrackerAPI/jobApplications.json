@@ -1,0 +1,10 @@
+[
+  {
+    "Id": 1,
+    "CompanyName": "SomeCompany",
+    "Position": "Analyst",
+    "DateApplied": "2025-05-22T17:13:42.186Z",
+    "Status": "interview",
+    "Feedback": "good"
+  }
+]
