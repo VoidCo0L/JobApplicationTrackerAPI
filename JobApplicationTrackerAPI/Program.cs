@@ -1,11 +1,15 @@
+using JobApplicationTrackerApi.Data;
 using JobApplicationTrackerApi.Repositories;
 using JobApplicationTrackerApi.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<IJobApplicationRepository, JsonFileJobApplicationRepository>();
 builder.Services.AddSingleton<IJobApplicationService, JobApplicationService>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
