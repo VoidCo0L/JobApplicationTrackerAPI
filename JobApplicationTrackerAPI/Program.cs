@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<IJobApplicationRepository, JsonFileJobApplicationRepository>();
-builder.Services.AddSingleton<IJobApplicationService, JobApplicationService>();
+builder.Services.AddScoped<IJobApplicationRepository, JobApplicationEfRepository>();
+builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

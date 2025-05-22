@@ -1,7 +1,8 @@
 ﻿using JobApplicationTrackerApi.Models;
-using JobApplicationTrackerApi.Repositories;
 using JobApplicationTrackerApi.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JobApplicationTrackerApi.Controllers
 {
@@ -17,15 +18,16 @@ namespace JobApplicationTrackerApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<JobApplication>> GetAll()
+        public async Task<ActionResult<IEnumerable<JobApplication>>> GetAll()
         {
-            return Ok(_service.GetAll());
+            var allApplications = await _service.GetAllAsync();
+            return Ok(allApplications);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<JobApplication> GetById(int id)
+        public async Task<ActionResult<JobApplication>> GetById(int id)
         {
-            var app = _service.GetById(id);
+            var app = await _service.GetByIdAsync(id);
             if (app == null)
                 return NotFound();
 
@@ -33,19 +35,19 @@ namespace JobApplicationTrackerApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult<JobApplication> Create(JobApplication application)
+        public async Task<ActionResult<JobApplication>> Create(JobApplication application)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _service.Add(application);
+            await _service.AddAsync(application);
             return CreatedAtAction(nameof(GetById), new { id = application.Id }, application);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, JobApplication application)
+        public async Task<IActionResult> Update(int id, JobApplication application)
         {
             if (!ModelState.IsValid)
             {
@@ -55,22 +57,22 @@ namespace JobApplicationTrackerApi.Controllers
             if (id != application.Id)
                 return BadRequest();
 
-            var existing = _service.GetById(id);
+            var existing = await _service.GetByIdAsync(id);
             if (existing == null)
                 return NotFound();
 
-            _service.Update(application);
+            await _service.UpdateAsync(application);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var existing = _service.GetById(id);
+            var existing = await _service.GetByIdAsync(id);
             if (existing == null)
                 return NotFound();
 
-            _service.Delete(id);
+            await _service.DeleteAsync(id);
             return NoContent();
         }
     }

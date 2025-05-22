@@ -1,5 +1,7 @@
 ﻿using JobApplicationTrackerApi.Models;
 using JobApplicationTrackerApi.Repositories;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace JobApplicationTrackerApi.Services
 {
@@ -12,14 +14,14 @@ namespace JobApplicationTrackerApi.Services
             _repository = repository;
         }
 
-        public IEnumerable<JobApplication> GetAll() => _repository.GetAll();
+        public Task<IEnumerable<JobApplication>> GetAllAsync() => _repository.GetAllAsync();
 
-        public JobApplication? GetById(int id) => _repository.GetById(id);
+        public Task<JobApplication?> GetByIdAsync(int id) => _repository.GetByIdAsync(id);
 
-        public void Add(JobApplication application) => _repository.Add(application);
+        public Task AddAsync(JobApplication application) => _repository.AddAsync(application);
 
-        public void Update(JobApplication application) => _repository.Update(application);
+        public Task UpdateAsync(JobApplication application) => _repository.UpdateAsync(application);
 
-        public void Delete(int id) => _repository.Delete(id);
+        public Task DeleteAsync(int id) => _repository.DeleteAsync(id);
     }
 }

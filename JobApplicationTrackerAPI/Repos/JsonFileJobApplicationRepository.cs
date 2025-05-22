@@ -1,5 +1,9 @@
 ﻿using System.Text.Json;
 using JobApplicationTrackerApi.Models;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System.IO;
 
 namespace JobApplicationTrackerApi.Repositories
 {
@@ -25,21 +29,27 @@ namespace JobApplicationTrackerApi.Repositories
             }
         }
 
-        public IEnumerable<JobApplication> GetAll() => _applications;
+        public Task<IEnumerable<JobApplication>> GetAllAsync()
+        {
+            return Task.FromResult(_applications.AsEnumerable());
+        }
 
-        public JobApplication? GetById(int id) =>
-            _applications.FirstOrDefault(a => a.Id == id);
+        public Task<JobApplication?> GetByIdAsync(int id)
+        {
+            var app = _applications.FirstOrDefault(a => a.Id == id);
+            return Task.FromResult(app);
+        }
 
-        public void Add(JobApplication application)
+        public async Task AddAsync(JobApplication application)
         {
             application.Id = _nextId++;
             _applications.Add(application);
-            SaveChanges();
+            await SaveChangesAsync();
         }
 
-        public void Update(JobApplication application)
+        public async Task UpdateAsync(JobApplication application)
         {
-            var existing = GetById(application.Id);
+            var existing = _applications.FirstOrDefault(a => a.Id == application.Id);
             if (existing != null)
             {
                 existing.CompanyName = application.CompanyName;
@@ -47,17 +57,17 @@ namespace JobApplicationTrackerApi.Repositories
                 existing.DateApplied = application.DateApplied;
                 existing.Status = application.Status;
                 existing.Feedback = application.Feedback;
-                SaveChanges();
+                await SaveChangesAsync();
             }
         }
 
-        public void Delete(int id)
+        public async Task DeleteAsync(int id)
         {
-            var app = GetById(id);
+            var app = _applications.FirstOrDefault(a => a.Id == id);
             if (app != null)
             {
                 _applications.Remove(app);
-                SaveChanges();
+                await SaveChangesAsync();
             }
         }
 
@@ -65,6 +75,12 @@ namespace JobApplicationTrackerApi.Repositories
         {
             var json = JsonSerializer.Serialize(_applications, new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_filePath, json);
+        }
+
+        private async Task SaveChangesAsync()
+        {
+            var json = JsonSerializer.Serialize(_applications, new JsonSerializerOptions { WriteIndented = true });
+            await File.WriteAllTextAsync(_filePath, json);
         }
     }
 }
