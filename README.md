@@ -1,4 +1,4 @@
-# Job Application Tracker API
+# 📋Job Application Tracker API
 
 A simple ASP.NET Core Web API to track job applications.  
 Supports two types of data storage repositories:
@@ -7,7 +7,7 @@ Supports two types of data storage repositories:
 
 ---
 
-## Features
+## ✨Features
 
 - CRUD operations for job applications
 - Repository pattern with EF Core and JSON file implementations
@@ -16,7 +16,7 @@ Supports two types of data storage repositories:
 
 ---
 
-## Prerequisites
+## 📦Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0)
 - [SQL Server Express](https://www.microsoft.com/en-us/sql-server/sql-server-downloads) (or any SQL Server instance)
@@ -25,7 +25,7 @@ Supports two types of data storage repositories:
 
 ---
 
-## Required NuGet Packages
+## 📚Required NuGet Packages
 
 Make sure your project has the following NuGet packages installed:
 
@@ -49,7 +49,7 @@ Or via the .NET CLI
 - `dotnet add package Microsoft.EntityFrameworkCore.Tools`
 - `dotnet add package Swashbuckle.AspNetCore`
 
-## Configuration
+## ⚙️Configuration
 ### Connection String
 
 Update your appsettings.json with your SQL Server connection string.
@@ -59,12 +59,12 @@ Update your appsettings.json with your SQL Server connection string.
   "DefaultConnection": "Server=localhost\\SQLEXPRESS01;Database=JobApplicationDb;Trusted_Connection=True;MultipleActiveResultSets=true"
 }
 ````
-## Database Setup
+## 🗄️Database Setup
 Run the following commands in your project root directory (where your .csproj is):
 - `dotnet ef migrations add InitialCreate` creates the initial migration scripts based on your DbContext and models.
 - `dotnet ef database update` applies the migration and creates the database with the required tables.
 
-## Running the Application
+## ▶️Running the Application
 
 Run your API project using Visual Studio or from the command line:
 
@@ -76,7 +76,7 @@ By default, Swagger UI will be available at:
 
 Use Swagger to test the API endpoints like GET, POST, PUT, DELETE for job applications.
 
-## Dependency Injection Setup (Program.cs)
+## 📌Dependency Injection Setup (Program.cs)
 ``` csharp
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationEfRepository>();
 builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
@@ -88,12 +88,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 ````
 
-##Notes
+## 📖Notes
 - Use Entity Framework repository for production and SQL Server.
 - Use JSON file repository for quick testing or if you want to persist data without a database.
 - The repository interface is async to support scalability and efficient IO.
 
-## Troubleshooting
+## 🛠️Troubleshooting
 
 If you get errors running EF commands:
 
