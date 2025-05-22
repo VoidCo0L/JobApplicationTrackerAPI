@@ -6,5 +6,13 @@
     "DateApplied": "2025-05-22T17:13:42.186Z",
     "Status": "interview",
     "Feedback": "good"
+  },
+  {
+    "Id": 2,
+    "CompanyName": "VoidCool",
+    "Position": "Developer",
+    "DateApplied": "2025-05-22T17:40:18.636Z",
+    "Status": "Applied",
+    "Feedback": "good"
   }
 ]

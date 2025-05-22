@@ -1,5 +1,6 @@
 ﻿using JobApplicationTrackerApi.Models;
 using JobApplicationTrackerApi.Repositories;
+using JobApplicationTrackerApi.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JobApplicationTrackerApi.Controllers
@@ -8,23 +9,23 @@ namespace JobApplicationTrackerApi.Controllers
     [Route("api/[controller]")]
     public class JobApplicationsController : ControllerBase
     {
-        private readonly IJobApplicationRepository _repository;
+        private readonly IJobApplicationService _service;
 
-        public JobApplicationsController(IJobApplicationRepository repository)
+        public JobApplicationsController(IJobApplicationService service)
         {
-            _repository = repository;
+            _service = service;
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<JobApplication>> GetAll()
         {
-            return Ok(_repository.GetAll());
+            return Ok(_service.GetAll());
         }
 
         [HttpGet("{id}")]
         public ActionResult<JobApplication> GetById(int id)
         {
-            var app = _repository.GetById(id);
+            var app = _service.GetById(id);
             if (app == null)
                 return NotFound();
 
@@ -39,7 +40,7 @@ namespace JobApplicationTrackerApi.Controllers
                 return BadRequest(ModelState);
             }
 
-            _repository.Add(application);
+            _service.Add(application);
             return CreatedAtAction(nameof(GetById), new { id = application.Id }, application);
         }
 
@@ -54,22 +55,22 @@ namespace JobApplicationTrackerApi.Controllers
             if (id != application.Id)
                 return BadRequest();
 
-            var existing = _repository.GetById(id);
+            var existing = _service.GetById(id);
             if (existing == null)
                 return NotFound();
 
-            _repository.Update(application);
+            _service.Update(application);
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var existing = _repository.GetById(id);
+            var existing = _service.GetById(id);
             if (existing == null)
                 return NotFound();
 
-            _repository.Delete(id);
+            _service.Delete(id);
             return NoContent();
         }
     }
